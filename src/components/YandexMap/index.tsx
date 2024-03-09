@@ -13,12 +13,6 @@ const YandexMap = () => {
                         [55.66, 37.6],
                         [55.71, 37.69],
                     ]}
-                    options={{
-                        draggable: true,
-                        fillColor: "#ffff0022",
-                        strokeColor: "#3caa3c88",
-                        strokeWidth: 7,
-                    }}
                 />
             </Map>
         </YMaps>
