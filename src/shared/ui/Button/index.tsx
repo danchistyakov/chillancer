@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './Button.module.css';
+import {IButtonProps} from "@/shared/ui/Button/interfaces";
 
-const Button = ({text}) => {
+const Button: FC<IButtonProps> = ({text}) => {
     return (
         <button className={styles.container}>
             {text}
