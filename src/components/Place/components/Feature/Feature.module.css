@@ -1,0 +1,6 @@
+.container {
+    padding: 4px 16px;
+    background: #5890ED;
+    border-radius: 50px;
+    color: var(--milky-app)
+}

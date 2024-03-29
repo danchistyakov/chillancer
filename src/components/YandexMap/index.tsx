@@ -6,7 +6,7 @@ import {Map, Placemark, Rectangle, YMaps} from "@pbe/react-yandex-maps";
 const YandexMap = () => {
     return (
         <YMaps>
-            <Map defaultState={{center: [55.740200, 37.583856], zoom: 11}} width='100%' height={600}>
+            <Map defaultState={{center: [55.740200, 37.583856], zoom: 11}} width='100%' height={915}>
                 <Placemark defaultGeometry={[55.781106, 37.567824]}/>
                 <Rectangle
                     geometry={[
