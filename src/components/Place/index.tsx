@@ -25,6 +25,7 @@ const Place = () => {
                     <p className={styles.title}>Mátes Pizza&Bar</p>
                     <CloseIcon className={styles.closeIcon} onClick={() => setClose(true)}/>
                 </div>
+                <p className={styles.categories}>Ресторан, Кофейня</p>
                 <Slider/>
                 <div className={styles.infos}>
                     <Info icon={<Location/>} text='Ленинградский просп., 29, стр. 5'/>

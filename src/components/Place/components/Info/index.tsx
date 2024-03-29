@@ -6,7 +6,7 @@ const Info: FC<IInfoProps> = ({icon, text}) => {
     return (
         <div className={styles.container}>
             {icon}
-            <p>{text}</p>
+            <p className={styles.text}>{text}</p>
         </div>
     );
 };
