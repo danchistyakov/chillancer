@@ -2,5 +2,7 @@
     padding: 4px 16px;
     background: #5890ED;
     border-radius: 50px;
-    color: var(--milky-app)
+    color: var(--milky-app);
+    font-weight: 600;
+    font-size: 20px;
 }
