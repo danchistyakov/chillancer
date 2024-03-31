@@ -19,8 +19,6 @@
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
     width: 100%;
     padding: 0 24px 24px 24px;
     margin: 0 auto;
@@ -45,19 +43,12 @@
     top: 0;
 }
 
-.top {
-    background: #FFFFFF;
-    padding-top: 53px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .title {
     font-size: 32px;
     font-weight: 700;
     color: #000;
     letter-spacing: 0.02em;
+    margin-top: 37px;
     margin-bottom: 8px;
 }
 

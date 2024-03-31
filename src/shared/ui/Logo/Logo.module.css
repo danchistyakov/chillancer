@@ -1,0 +1,16 @@
+.container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    top: 11px;
+    left: 0;
+    right: 0;
+    border-radius: 37px;
+    width: 125px;
+    height: 37px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+    background: #FFFFFF;
+    z-index: 1;
+}

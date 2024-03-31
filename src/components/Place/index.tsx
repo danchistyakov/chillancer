@@ -11,6 +11,8 @@ import CloseIcon from '@/assets/icons/Place/CloseIcon.svg'
 import Location from '@/assets/icons/Place/Location.svg'
 import Train from '@/assets/icons/Place/Train.svg'
 import Clock from '@/assets/icons/Place/Clock.svg'
+import NavigationArrow from '@/assets/icons/shared/Button/NavigationArrow.svg'
+import ReviewsSlider from "@/components/Place/components/ReviewsSlider";
 
 const Place = () => {
     const [isClose, setClose] = useState(false);
@@ -23,17 +25,14 @@ const Place = () => {
     return (
         <Drawer.Root>
             <Drawer.Trigger asChild>
-                <button className={styles.button}>Open Drawer</button>
+                <button className={styles.button}>ОТКРЫТЬ КРАСИВУЮ ВСПЛЫВАШКУ</button>
             </Drawer.Trigger>
             <Drawer.Portal>
                 <Drawer.Overlay className={styles.overlay}/>
                 <Drawer.Content className={styles.container}>
                     <div className={styles.content}>
                         <div className={styles.thumb}/>
-                        <div className={styles.top}>
-                            <p className={styles.title}>Mátes Pizza&Bar</p>
-                            <CloseIcon className={styles.closeIcon} onClick={() => setClose(true)}/>
-                        </div>
+                        <h1 className={styles.title}>Mátes Pizza&Bar</h1>
                         <p className={styles.categories}>Ресторан, Кофейня</p>
                         <Slider/>
                         <div className={styles.infos}>
@@ -42,9 +41,9 @@ const Place = () => {
                             <Info icon={<Clock/>} text='c 10:00 до 20:00'/>
                         </div>
                         <div className={styles.middle}>
-                            <Button text='Построить маршрут'/>
+                            <Button icon={<NavigationArrow/>} text='Построить маршрут'/>
                         </div>
-                        <h3 className={styles.subtitle}>Описание локации</h3>
+                        <h3 className={styles.subtitle}>Описание</h3>
                         <p className={styles.description}>Бизнес-район с большим количеством хороших ресторанов и
                             современной
                             архитектурой. Здесь можно
@@ -55,6 +54,8 @@ const Place = () => {
                                 <Feature key={key} text={item}/>
                             ))}
                         </div>
+                        <ReviewsSlider/>
+                        <Button text='Оставить отзыв'/>
                     </div>
                 </Drawer.Content>
             </Drawer.Portal>
