@@ -18,7 +18,7 @@ const OpenMapApp: FC<IOpenMapAppProps> = ({coordinates, isOpenMap, onHandleMapPo
                                    width={90} height={90}/>
                             <p className={styles.appName}>Google</p>
                         </a>
-                        <a href={`yandexmaps://maps.yandex.ru/?ll=${coordinates.lng}, ${coordinates.lat}&z=12`} className={styles.app}>
+                        <a href={`yandexmaps://maps.yandex.ru/?rtext=59.967870,30.242658~${coordinates.lat},${coordinates.lng}&rtt=pd`} className={styles.app}>
                             <Image className={styles.logo} alt='Яндекс Карты' src='/images/OpenMapApp/YandexMaps.png'
                                    width={90} height={90}/>
                             <p className={styles.appName}>Yandex</p>
