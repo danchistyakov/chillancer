@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import styles from './Place.module.css';
 import {Drawer} from 'vaul';
 import Slider from "@/components/Place/components/Slider";
@@ -13,50 +13,64 @@ import Train from '@/assets/icons/Place/Train.svg'
 import Clock from '@/assets/icons/Place/Clock.svg'
 import NavigationArrow from '@/assets/icons/shared/Button/NavigationArrow.svg'
 import ReviewsSlider from "@/components/Place/components/ReviewsSlider";
+import {useRouter} from "next/navigation";
+import Markdown from "markdown-to-jsx";
+import OpenMapApp from "@/components/Place/components/OpenMapApp";
 
-const Place = () => {
-    const [isClose, setClose] = useState(false);
+const Place: FC<any> = ({data}) => {
     const [open, setOpen] = useState(true)
+    const [isOpenMap, setOpenMap] = useState(false);
+    const router = useRouter()
 
-    // if (isClose) {
-    //     return <></>
-    // }
+    const {address, categories, description, features, images, metro, title, workingHours} = data;
+
+    const handleChange = (data: boolean) => {
+        if (!data) {
+            setOpen(false)
+            setTimeout(() => {
+                router.push('/');
+            }, 100)
+        }
+    }
+
+    const onHandleMapPopup = (data: any) => {
+        setOpenMap(prev => typeof data === 'boolean' ? data : !prev)
+    }
+
+    const onCloseDrawer = () => {
+        setOpen(false)
+    }
 
     return (
-        <Drawer.Root>
-            <Drawer.Trigger asChild>
-                <button className={styles.button}>ОТКРЫТЬ КРАСИВУЮ ВСПЛЫВАШКУ</button>
-            </Drawer.Trigger>
+        <Drawer.Root open={open} onOpenChange={handleChange}>
             <Drawer.Portal>
                 <Drawer.Overlay className={styles.overlay}/>
-                <Drawer.Content className={styles.container}>
+                <Drawer.Content className={styles.container} style={{zIndex: 1}}>
                     <div className={styles.content}>
                         <div className={styles.thumb}/>
-                        <h1 className={styles.title}>Mátes Pizza&Bar</h1>
-                        <p className={styles.categories}>Ресторан, Кофейня</p>
-                        <Slider/>
+                        <h1 className={styles.title}>{title}</h1>
+                        <CloseIcon className={styles.closeIcon} onClick={onCloseDrawer}/>
+                        <p className={styles.categories}>{categories.data.map(({attributes}) => attributes.title).join(', ')}</p>
+                        <Slider data={images.data}/>
                         <div className={styles.infos}>
-                            <Info icon={<Location/>} text='Ленинградский просп., 29, стр. 5'/>
-                            <Info icon={<Train/>} text='м. Динамо'/>
-                            <Info icon={<Clock/>} text='c 10:00 до 20:00'/>
+                            <Info icon={<Location className={styles.infoIcon}/>} text={address.address}/>
+                            <Info icon={<Train className={styles.infoIcon}/>} text={metro}/>
+                            <Info icon={<Clock className={styles.infoIcon}/>} text={workingHours}/>
                         </div>
-                        <div className={styles.middle}>
-                            <Button icon={<NavigationArrow/>} text='Построить маршрут'/>
-                        </div>
+                        <Button className={styles.routeButton} icon={<NavigationArrow/>} onClick={onHandleMapPopup}
+                                text='Построить маршрут'/>
                         <h3 className={styles.subtitle}>Описание</h3>
-                        <p className={styles.description}>Бизнес-район с большим количеством хороших ресторанов и
-                            современной
-                            архитектурой. Здесь можно
-                            провести фотосессию и попробовать изысканные блюда, сидя на летней веранде. </p>
+                        <Markdown className={styles.description}>{description}</Markdown>
                         <h3 className={styles.subtitle}>Преимущества</h3>
                         <div className={styles.features}>
-                            {['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'].map((item, key) => (
-                                <Feature key={key} text={item}/>
+                            {features.data.map(({attributes, id}) => (
+                                <Feature key={id} text={attributes.title}/>
                             ))}
                         </div>
                         <ReviewsSlider/>
                         <Button text='Оставить отзыв'/>
                     </div>
+                    <OpenMapApp coordinates={data.address.coordinates} isOpenMap={isOpenMap} onHandleMapPopup={onHandleMapPopup}/>
                 </Drawer.Content>
             </Drawer.Portal>
         </Drawer.Root>
