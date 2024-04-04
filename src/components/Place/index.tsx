@@ -16,13 +16,15 @@ import ReviewsSlider from "@/components/Place/components/ReviewsSlider";
 import {useRouter} from "next/navigation";
 import Markdown from "markdown-to-jsx";
 import OpenMapApp from "@/components/Place/components/OpenMapApp";
+import ReviewPopup from "@/components/Place/components/ReviewPopup";
 
 const Place: FC<any> = ({data}) => {
     const [open, setOpen] = useState(true)
     const [isOpenMap, setOpenMap] = useState(false);
+    const [isOpenReview, setOpenReview] = useState(false);
     const router = useRouter()
 
-    const {address, categories, description, features, images, metro, title, workingHours} = data;
+    const {address, categories, description, features, images, metro, reviews, title, workingHours} = data;
 
     const handleChange = (data: boolean) => {
         if (!data) {
@@ -37,9 +39,15 @@ const Place: FC<any> = ({data}) => {
         setOpenMap(prev => typeof data === 'boolean' ? data : !prev)
     }
 
+    const onHandleReviewPopup = (data: any) => {
+        setOpenReview(prev => typeof data === 'boolean' ? data : !prev)
+    }
+
     const onCloseDrawer = () => {
         setOpen(false)
     }
+
+
 
     return (
         <Drawer.Root open={open} onOpenChange={handleChange}>
@@ -67,10 +75,12 @@ const Place: FC<any> = ({data}) => {
                                 <Feature key={id} text={attributes.title}/>
                             ))}
                         </div>
-                        <ReviewsSlider/>
-                        <Button text='Оставить отзыв'/>
+                        <ReviewsSlider data={reviews.data}/>
+                        <Button text='Оставить отзыв' onClick={onHandleReviewPopup}/>
                     </div>
-                    <OpenMapApp coordinates={data.address.coordinates} isOpenMap={isOpenMap} onHandleMapPopup={onHandleMapPopup}/>
+                    <OpenMapApp coordinates={data.address.coordinates} isOpenMap={isOpenMap}
+                                onHandleMapPopup={onHandleMapPopup}/>
+                    <ReviewPopup isOpenReview={isOpenReview} onHandleReviewPopup={onHandleReviewPopup}/>
                 </Drawer.Content>
             </Drawer.Portal>
         </Drawer.Root>

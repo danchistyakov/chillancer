@@ -30,3 +30,9 @@ button {
   border: none;
   outline: 0;
 }
+
+input, textarea {
+  font-family: 'SF Pro Rounded', sans-serif;
+  border: none;
+  outline: 0;
+}

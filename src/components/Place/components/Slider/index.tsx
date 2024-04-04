@@ -14,7 +14,7 @@ const Slider = ({data}) => {
             {data.map(({attributes, id}) => (
                 <SwiperSlide className={styles.slide} key={id}>
                     <img data-vaul-no-drag={true}
-                         src={`http://147.45.110.161:1337${attributes.formats.small.url}`}/>
+                         src={`${process.env.NEXT_PUBLIC_API_URL}${attributes.formats.small.url}`}/>
                 </SwiperSlide>
             ))}
         </Swiper>

@@ -3,50 +3,24 @@
 import React from 'react';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from './ReviewsSlider.module.css';
+import Markdown from "markdown-to-jsx";
 
-const ReviewsSlider = () => {
+const ReviewsSlider = ({data}) => {
     return (
         <Swiper
             className={styles.container}
             spaceBetween={8}
             slidesPerView={1.5}
         >
-            <SwiperSlide className={styles.slide}>
-                <div className={styles.header}>
-                    <p className={styles.name}>Марина</p>
-                    <p className={styles.rating}>⭐️ 4.5</p>
-                </div>
-                <p className={styles.description}>Бизнес-район с большим количеством хороших ресторанов и современной
-                    архитектурой. Здесь можно
-                    провести фотосессию и попробовать изысканные блюда, сидя на летней веранде.</p>
-            </SwiperSlide>
-            <SwiperSlide className={styles.slide}>
-                <div className={styles.header}>
-                    <p className={styles.name}>Марина</p>
-                    <p className={styles.rating}>⭐️ 4.5</p>
-                </div>
-                <p className={styles.description}>Бизнес-район с большим количеством хороших ресторанов и современной
-                    архитектурой. Здесь можно
-                    провести фотосессию и попробовать изысканные блюда, сидя на летней веранде.</p>
-            </SwiperSlide>
-            <SwiperSlide className={styles.slide}>
-                <div className={styles.header}>
-                    <p className={styles.name}>Марина</p>
-                    <p className={styles.rating}>⭐️ 4.5</p>
-                </div>
-                <p className={styles.description}>Бизнес-район с большим количеством хороших ресторанов и современной
-                    архитектурой. Здесь можно
-                    провести фотосессию и попробовать изысканные блюда, сидя на летней веранде.</p>
-            </SwiperSlide>
-            <SwiperSlide className={styles.slide}>
-                <div className={styles.header}>
-                    <p className={styles.name}>Марина</p>
-                    <p className={styles.rating}>⭐️ 4.5</p>
-                </div>
-                <p className={styles.description}>Бизнес-район с большим количеством хороших ресторанов и современной
-                    архитектурой. Здесь можно
-                    провести фотосессию и попробовать изысканные блюда, сидя на летней веранде.</p>
-            </SwiperSlide>
+            {data.map(({attributes, id}) => (
+                <SwiperSlide className={styles.slide} key={id}>
+                    <div className={styles.header}>
+                        <p className={styles.name}>{attributes.name}</p>
+                        <p className={styles.rating}>⭐️ {attributes.rate}</p>
+                    </div>
+                    <Markdown className={styles.description}>{attributes.content}</Markdown>
+                </SwiperSlide>
+            ))}
         </Swiper>
     );
 };
