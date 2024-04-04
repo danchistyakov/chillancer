@@ -7,7 +7,7 @@ import Input from "@/shared/ui/Input";
 import TextArea from "@/shared/ui/TextArea";
 import {createReview} from "@/app/actions";
 
-const ReviewPopup = ({isOpenReview, onHandleReviewPopup}) => {
+const ReviewPopup = ({isOpenReview, onHandleReviewPopup, onHandleThanksPopup}) => {
     const [review, setReview] = useState({content: '', name: '', rate: 0})
 
     const onSelectStar = (e) => {
@@ -15,10 +15,13 @@ const ReviewPopup = ({isOpenReview, onHandleReviewPopup}) => {
         setReview(prev => ({...prev, rate}));
     }
 
-    const onSendReview = () => {
+    const onSendReview = async () => {
         const placeId = Number(window.location.href.split('/')[4]);
-        console.log(placeId)
-        createReview(review, placeId);
+        const {data} = await createReview(review, placeId);
+        if (data) {
+            onHandleReviewPopup(false)
+            onHandleThanksPopup(true)
+        }
     }
 
     return (

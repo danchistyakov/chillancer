@@ -17,11 +17,14 @@ import {useRouter} from "next/navigation";
 import Markdown from "markdown-to-jsx";
 import OpenMapApp from "@/components/Place/components/OpenMapApp";
 import ReviewPopup from "@/components/Place/components/ReviewPopup";
+import ThanksReview from "@/components/Place/components/ThanksReview";
 
 const Place: FC<any> = ({data}) => {
     const [open, setOpen] = useState(true)
     const [isOpenMap, setOpenMap] = useState(false);
     const [isOpenReview, setOpenReview] = useState(false);
+    const [isThanksReview, setThanksReview] = useState(false);
+
     const router = useRouter()
 
     const {address, categories, description, features, images, metro, reviews, title, workingHours} = data;
@@ -43,10 +46,13 @@ const Place: FC<any> = ({data}) => {
         setOpenReview(prev => typeof data === 'boolean' ? data : !prev)
     }
 
+    const onHandleThanksPopup = (data: any) => {
+        setThanksReview(prev => typeof data === 'boolean' ? data : !prev)
+    }
+
     const onCloseDrawer = () => {
         setOpen(false)
     }
-
 
 
     return (
@@ -80,7 +86,8 @@ const Place: FC<any> = ({data}) => {
                     </div>
                     <OpenMapApp coordinates={data.address.coordinates} isOpenMap={isOpenMap}
                                 onHandleMapPopup={onHandleMapPopup}/>
-                    <ReviewPopup isOpenReview={isOpenReview} onHandleReviewPopup={onHandleReviewPopup}/>
+                    <ReviewPopup isOpenReview={isOpenReview} onHandleThanksPopup={onHandleThanksPopup} onHandleReviewPopup={onHandleReviewPopup}/>
+                    <ThanksReview isOpen={isThanksReview} onHandlePopup={onHandleThanksPopup} onClose={setOpen}/>
                 </Drawer.Content>
             </Drawer.Portal>
         </Drawer.Root>
