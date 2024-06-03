@@ -26,6 +26,7 @@ const Place: FC<any> = ({data}) => {
     const [isThanksReview, setThanksReview] = useState(false);
 
     const router = useRouter()
+    console.log(data)
 
     const {address, categories, description, features, images, metro, reviews, title, workingHours} = data;
 
@@ -75,12 +76,16 @@ const Place: FC<any> = ({data}) => {
                                 text='Построить маршрут'/>
                         <h3 className={styles.subtitle}>Описание</h3>
                         <Markdown className={styles.description}>{description}</Markdown>
-                        <h3 className={styles.subtitle}>Преимущества</h3>
-                        {features.length > 0 && (<div className={styles.features}>
-                            {features.data.map(({attributes, id}) => (
-                                <Feature key={id} text={attributes.title}/>
-                            ))}
-                        </div>)}
+                        {features.data.length > 0 && (
+                            <>
+                                <h3 className={styles.subtitle}>Преимущества</h3>
+                                <div className={styles.features}>
+                                    {features.data.map(({attributes, id}) => (
+                                        <Feature key={id} text={attributes.title}/>
+                                    ))}
+                                </div>
+                            </>
+                        )}
                         <ReviewsSlider data={reviews.data}/>
                         <Button text='Оставить отзыв' onClick={onHandleReviewPopup}/>
                     </div>

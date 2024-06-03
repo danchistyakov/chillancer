@@ -1,5 +1,6 @@
 .container {
-    margin-top: 16px;
+    padding-top: 20px;
+    border-top: 1px solid var(--milky);
     margin-bottom: 24px;
 }
 
