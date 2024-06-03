@@ -76,17 +76,18 @@ const Place: FC<any> = ({data}) => {
                         <h3 className={styles.subtitle}>Описание</h3>
                         <Markdown className={styles.description}>{description}</Markdown>
                         <h3 className={styles.subtitle}>Преимущества</h3>
-                        <div className={styles.features}>
+                        {features.length > 0 && (<div className={styles.features}>
                             {features.data.map(({attributes, id}) => (
                                 <Feature key={id} text={attributes.title}/>
                             ))}
-                        </div>
+                        </div>)}
                         <ReviewsSlider data={reviews.data}/>
                         <Button text='Оставить отзыв' onClick={onHandleReviewPopup}/>
                     </div>
                     <OpenMapApp coordinates={data.address.coordinates} isOpenMap={isOpenMap}
                                 onHandleMapPopup={onHandleMapPopup}/>
-                    <ReviewPopup isOpenReview={isOpenReview} onHandleThanksPopup={onHandleThanksPopup} onHandleReviewPopup={onHandleReviewPopup}/>
+                    <ReviewPopup isOpenReview={isOpenReview} onHandleThanksPopup={onHandleThanksPopup}
+                                 onHandleReviewPopup={onHandleReviewPopup}/>
                     <ThanksReview isOpen={isThanksReview} onHandlePopup={onHandleThanksPopup} onClose={setOpen}/>
                 </Drawer.Content>
             </Drawer.Portal>
